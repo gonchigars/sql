@@ -114,6 +114,96 @@ JOIN Hobbies ON Friends.ID = Hobbies.FriendID;
 
 This is like laying out all your friends' cards next to their hobby cards, so you can see which hobbies belong to which friends.
 
+# SQL JOIN Explanation with Text Diagram
+
+Let's break down this SQL query:
+
+```sql
+SELECT Friends.Name, Hobbies.HobbyName 
+FROM Friends 
+JOIN Hobbies ON Friends.ID = Hobbies.FriendID;
+```
+
+To understand how this JOIN works, let's visualize our Friends and Hobbies tables, and then see how the JOIN connects them.
+
+## Friends Table
+```
++----+--------+-----+
+| ID | Name   | Age |
++----+--------+-----+
+| 1  | Alice  | 25  |
+| 2  | Bob    | 30  |
+| 3  | Charlie| 35  |
++----+--------+-----+
+```
+
+## Hobbies Table
+```
++----+----------+-----------+
+| ID | FriendID | HobbyName |
++----+----------+-----------+
+| 1  | 1        | Painting  |
+| 2  | 1        | Singing   |
+| 3  | 2        | Dancing   |
++----+----------+-----------+
+```
+
+Now, let's see how the JOIN connects these tables:
+
+```
+Friends Table        JOIN Condition         Hobbies Table
++----+--------+      Friends.ID =      +----+----------+-----------+
+| ID | Name   |      Hobbies.FriendID  | ID | FriendID | HobbyName |
++----+--------+                        +----+----------+-----------+
+| 1  | Alice  |------------------------| 1  | 1        | Painting  |
+|    |        |------------------------| 2  | 1        | Singing   |
+| 2  | Bob    |------------------------| 3  | 2        | Dancing   |
+| 3  | Charlie|
++----+--------+                        +----+----------+-----------+
+```
+
+The JOIN operation connects rows from the Friends table with rows from the Hobbies table where the ID in Friends matches the FriendID in Hobbies. The result of this JOIN would look like this:
+
+```
+Result of JOIN
++-------+-----------+
+| Name  | HobbyName |
++-------+-----------+
+| Alice | Painting  |
+| Alice | Singing   |
+| Bob   | Dancing   |
++-------+-----------+
+```
+
+Notice that:
+1. Alice appears twice because she has two hobbies.
+2. Bob appears once with his one hobby.
+3. Charlie doesn't appear in the result because he doesn't have any hobbies in the Hobbies table.
+
+This type of JOIN is called an INNER JOIN, which only returns rows where there's a match in both tables. If you wanted to include friends without hobbies, you'd use a LEFT JOIN instead:
+
+```sql
+SELECT Friends.Name, Hobbies.HobbyName 
+FROM Friends 
+LEFT JOIN Hobbies ON Friends.ID = Hobbies.FriendID;
+```
+
+This would give:
+
+```
+Result of LEFT JOIN
++-------+-----------+
+| Name  | HobbyName |
++-------+-----------+
+| Alice | Painting  |
+| Alice | Singing   |
+| Bob   | Dancing   |
+| Charlie| NULL     |
++-------+-----------+
+```
+
+Now Charlie is included, but with a NULL hobby.
+
 ## Chapter 8: Grouping and Summarizing (Aggregate Functions)
 
 Sometimes, you want to summarize information:
