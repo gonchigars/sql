@@ -232,13 +232,12 @@ INSERT INTO Friends (ID, Name, Age, Email) VALUES
 (7, 'Grace', 31, 'grace@email.com'),
 (8, 'Henry', 27, 'henry@email.com');
 
-INSERT INTO Hobbies (ID, FriendID, HobbyName) VALUES 
-(4, 3, 'Reading'),
-(5, 4, 'Cooking'),
-(6, 5, 'Gardening'),
-(7, 6, 'Photography'),
-(8, 7, 'Yoga'),
-(9, 8, 'Running');
+INSERT INTO Hobbies (ID, FriendID, HobbyName) VALUES
+(4, 4, 'Reading'),
+(5, 5, 'Cooking'),
+(6, 6, 'Gardening'),
+(7, 7, 'Photography'),
+(8, 8, 'Yoga');
 ```
 
 ## Chapter 10: Practice Exercises
